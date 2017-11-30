@@ -10,17 +10,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SessionProvider {
 
-  results: string[];
-
   constructor(public http: HttpClient) {}
 
   login(user){
-    this.http.get('http://localhost:3000/login').subscribe(data => {
-      // Read the result field from the JSON response.
-      alert("hola");
-    }/*,
-    err => {
-      console.log("Error occured.");
-    }*/);
+    this.http.get('http://localhost:3000/login').subscribe(
+      data => {
+        // Read the result field from the JSON response.
+        alert(data);
+      },
+      err => {
+        console.log("Error occured.");
+      });
   }
 }
