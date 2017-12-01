@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ToastOptions } from 'ionic-angular';
 import { SessionProvider } from '../../providers/session/session';
 import { User } from '../../models/user';
+import { AppConst } from '../../AppConst';
 
 /**
  * Generated class for the SessionPage page.
@@ -17,11 +18,10 @@ import { User } from '../../models/user';
 })
 export class SessionPage {
 
-  private user: User;
+  private user: User = new User();
   private toastOptions: ToastOptions;
 
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public sessionProvider:SessionProvider) {
-    this.user = new User();
+  constructor(private toastController: ToastController, public navCtrl: NavController, public navParams: NavParams, public sessionProvider:SessionProvider) {
     this.toastOptions = {
       duration: 1000,
       position: 'middle'
@@ -34,11 +34,11 @@ export class SessionPage {
     }
     else{
       if(!this.user.getUsername()){
-        this.toastOptions.message = 'The user is missing!';
+        this.toastOptions.message = this.sessionProvider.const.USER_MISING;
       }else if(!this.user.getPassword()){
-        this.toastOptions.message = 'The password is missing!';
+        this.toastOptions.message = this.sessionProvider.const.PASSWORD_MISING;
       }
-      let toast = this.toastCtrl.create(this.toastOptions);
+      let toast = this.toastController.create(this.toastOptions);
       toast.present();
     }
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { ToastController, ToastOptions } from 'ionic-angular';
+import { AppConst } from '../../AppConst';
 /*
   Generated class for the SessionProvider provider.
 
@@ -10,16 +11,26 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SessionProvider {
 
-  constructor(public http: HttpClient) {}
+  private toastOptions: ToastOptions;
+  public const: AppConst = new AppConst();
+
+  constructor(public http: HttpClient, public toastController:ToastController) {
+    this.toastOptions = {
+      duration: 1000,
+      position: 'middle',
+      message: this.const.ERROR_SERVER
+    };
+  }
 
   login(user){
-    this.http.get('http://localhost:3000/login').subscribe(
+    this.http.get(this.const.URL_SERVER_LOGIN).subscribe(
       data => {
         // Read the result field from the JSON response.
         alert(data);
-      },
+      },  
       err => {
-        console.log("Error occured.");
+        let toast = this.toastController.create(this.toastOptions);
+        toast.present();        
       });
   }
 }
