@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ToastOptions } from 'ionic-angular';
 import { SessionProvider } from '../../providers/session/session';
 import { User } from '../../models/user';
-import { AppConst } from '../../AppConst';
 
 /**
  * Generated class for the SessionPage page.
